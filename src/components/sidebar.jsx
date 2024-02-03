@@ -20,31 +20,31 @@ const styles = {
 const menuitems = [
   {
     name: 'Dashboard',
-    icon: <img src={Dashboard} style={{width: '20px'}}></img>
+    icon: <img src={Dashboard} style={{width: '20px'}} alt=''></img>
   },
   {
     name: 'Upload',
-    icon: <img src={Upload} style={{width: '20px'}}></img>
+    icon: <img src={Upload} style={{width: '20px'}}alt=''></img>
   },
   {
     name: 'Invoice',
-    icon: <img src={Invoice} style={{width: '20px'}}></img>
+    icon: <img src={Invoice} style={{width: '20px'}}alt=''></img>
   },
   {
     name: 'Schedule',
-    icon: <img src={Schedule} style={{width: '20px'}}></img>
+    icon: <img src={Schedule} style={{width: '20px'}}alt=''></img>
   },
   {
     name: 'Calendar',
-    icon: <img src={Calendar} style={{width: '20px'}}></img>
+    icon: <img src={Calendar} style={{width: '20px'}}alt=''></img>
   },
   {
     name: 'Notification',
-    icon: <img src={Notification} style={{width: '20px'}}></img>
+    icon: <img src={Notification} style={{width: '20px'}}alt=''></img>
   },
   {
     name: 'Settings',
-    icon: <img src={Setting} style={{width: '20px'}}></img>
+    icon: <img src={Setting} style={{width: '20px'}}alt=''></img>
   },
 ];
 

@@ -15,7 +15,7 @@ class FrontPage extends React.Component {
         height: '100vh'
       }}>
 				<div style={{display: 'flex', maxWidth: '100%'}}>
-					<img src={appLogo}></img>
+					<img src={appLogo} alt=''></img>
 				</div>
         <div style={{
           display: 'flex',
@@ -48,10 +48,10 @@ class FrontPage extends React.Component {
               color: '#FFFFFF',
 
             }}>
-              <a href="https://github.com/Kirti-Harode" target='_blank' ><AiOutlineGithub /></a>
-              <a href="https://twitter.com/harode13345" target='_blank'><AiFillTwitterCircle /></a>
-              <a href="https://www.linkedin.com/in/kirti-harode/" target='_blank'><FaLinkedin /></a>
-              <a href="https://discord.com/" target='_blank'> <IoLogoDiscord /></a>
+              <a href="https://github.com/Kirti-Harode" target='_blank' rel="noopener noreferrer" ><AiOutlineGithub /></a>
+              <a href="https://twitter.com/harode13345" target='_blank' rel="noopener noreferrer"><AiFillTwitterCircle /></a>
+              <a href="https://www.linkedin.com/in/kirti-harode/" target='_blank' rel="noopener noreferrer"><FaLinkedin /></a>
+              <a href="https://discord.com/" target='_blank' rel="noopener noreferrer"> <IoLogoDiscord /></a>
             </div>
           </div>
           <div>

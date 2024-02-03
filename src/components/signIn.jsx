@@ -100,7 +100,7 @@ export const SignIn = () => {
 							padding: '10px'
 						}}>
 						</input>
-					<a href='' style={{
+					<button style={{
 						fontFamily: 'Lato',
 						fontSize: '16px',
 						fontWeight: '400',
@@ -108,7 +108,7 @@ export const SignIn = () => {
 						margin: '10px 0'
 					}}>
 						Forgot Password?
-					</a>
+					</button>
 					<button 
 						style={{
 							width: '356.77px',
@@ -136,7 +136,7 @@ export const SignIn = () => {
 					fontWeight: '400'
 				}}> 
 					Don't have a account? 
-					<a href="" style={{padding: '0 5px', color: '#346BD4'}}>Register here</a>
+					<button style={{padding: '0 5px', color: '#346BD4'}}>Register here</button>
 				</div>
 			</div>
     )
