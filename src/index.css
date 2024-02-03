@@ -1,0 +1,87 @@
+/* Reset Box Model */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Remove default list styles */
+ul, ol {
+  list-style: none;
+}
+
+/* Remove default heading margins */
+h1,h2,h3,h4,h5,h6 {
+  margin: 0;
+}
+
+/* Remove default anchor styling */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Reset font styles */
+body, button, input, select, textarea {
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: normal;
+}
+
+/* Remove default button styling */
+button {
+  border: none;
+  padding: 0;
+  background: none;
+  cursor: pointer;
+}
+
+/* Remove default form styles */
+/* input, select, textarea {
+  margin: 0;
+  padding: 0;
+  border: none;
+} */
+
+/* Set base styles for images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Set base styles for tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* Remove default styles for form elements */
+/* input[type="text"],
+input[type="password"],
+input[type="email"],
+textarea,
+select {
+  appearance: none;
+  border-radius: 0;
+  outline: none;
+} */
+
+/* Set default styles for blockquote */
+blockquote {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Montserrat', 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
