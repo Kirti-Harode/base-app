@@ -75,8 +75,8 @@ export default function UploadPage() {
 						justifyContent: 'space-between',
 						gap: '20px'
 					}}>
-						<img src={BellIcon} style={{width: '20px'}}/>
-						<img src={ProfilePhoto} style={{width: '30px'}}/>
+						<img src={BellIcon} style={{width: '20px'}}alt=''/>
+						<img src={ProfilePhoto} style={{width: '30px'}}alt=''/>
 					</div>
 				</div>
 				<div style={{
@@ -110,7 +110,7 @@ export default function UploadPage() {
 							isDragActive ?
 								<p>Drop the files here ...</p> :
 								<div>
-									<img src={excel} style={{width: '30px'}}/>
+									<img src={excel} style={{width: '30px'}}alt=''/>
 									<div style={{color: '#999CA0'}}>Drop your excel sheet here, or 
 										<p style={{color: '#605BFF', cursor: 'pointer'}}>browse</p>
 									</div>

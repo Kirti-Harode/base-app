@@ -53,7 +53,7 @@ export default class Sidebar extends Component {
     return (
       <div style={styles.sidebar}>
         <div style={{width:'200px', marginBottom: '20px', marginTop: '10px'}}>
-          <img src={blueBaseLogo}></img>
+          <img src={blueBaseLogo} alt=''></img>
         </div>
         <div>
         {
