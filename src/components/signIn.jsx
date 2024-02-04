@@ -5,7 +5,22 @@ import { useNavigate } from 'react-router-dom';
 export const SignIn = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
+	const [newUser, setNewUser] = useState(false);
+	const [isValidEmail, setIsValidEmail] = useState(true);
+	const [isValidPassword, setIsValidPassword] = useState(true);
+
 	const navigate = useNavigate();
+
+	function validEmail(email) {
+		if (email !== undefined && email !== null && email !== '') {
+			let parts = email.split('@');
+			if (!(parts.length === 2 && parts[1] && parts[1].split('.').length === 2)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
     return(
 			<div style={{
 				display: 'flex',
@@ -74,7 +89,13 @@ export const SignIn = () => {
 							border: 'none',
 							padding: '10px'
 						}}>
-						</input>
+					</input>
+					{
+						isValidEmail === false ? 
+						<div style={{color: 'red', fontSize: '10px'}}>
+							Enter a valid email
+						</div> : <div></div>
+					}
 					<h4 style={{
 						fontFamily: 'Lato',
 						fontSize: '16px',
@@ -98,7 +119,13 @@ export const SignIn = () => {
 							border: 'none',
 							padding: '10px'
 						}}>
-						</input>
+					</input>
+					{
+						isValidPassword === false ? 
+						<div style={{color: 'red', fontSize: '10px'}}>
+							Please enter password
+						</div> : <div></div>
+					}
 					<button style={{
 						fontFamily: 'Lato',
 						fontSize: '16px',
@@ -120,9 +147,19 @@ export const SignIn = () => {
 							fontSize: '16px',
 							fontWeight: '700',
 						}}
-						onClick={() => navigate('/upload')}
+						onClick={() => {
+							if(validEmail(email) === false || email.length === 0){
+								setIsValidEmail(false);
+							}else{
+								setIsValidEmail(true);
+							}
+							setIsValidPassword(password.length !== 0);
+							if(validEmail(email) && password.length !== 0){
+								navigate('/upload');
+							}
+						}}
 					>
-						Sign In
+						{newUser ? 'Sign Up' : 'Sign In'}
 					</button>
 				</div>
 				<div style={{
@@ -135,7 +172,9 @@ export const SignIn = () => {
 					fontWeight: '400'
 				}}> 
 					Don't have a account? 
-					<button style={{padding: '0 5px', color: '#346BD4'}}>Register here</button>
+					<button 
+						style={{padding: '0 5px', color: '#346BD4'}}
+						onClick={() => {setNewUser(true)}} >Register here</button>
 				</div>
 			</div>
     )
