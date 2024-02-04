@@ -92,7 +92,7 @@ export const SignIn = () => {
 					</input>
 					{
 						isValidEmail === false ? 
-						<div style={{color: 'red', fontSize: '10px'}}>
+						<div style={{color: 'red', fontSize: '10px', marginLeft: '5px'}}>
 							Enter a valid email
 						</div> : <div></div>
 					}
@@ -122,7 +122,7 @@ export const SignIn = () => {
 					</input>
 					{
 						isValidPassword === false ? 
-						<div style={{color: 'red', fontSize: '10px'}}>
+						<div style={{color: 'red', fontSize: '10px', marginLeft: '5px'}}>
 							Please enter password
 						</div> : <div></div>
 					}

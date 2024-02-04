@@ -13,7 +13,6 @@ const styles = {
     gap: '15px',
     width: '218px',
     height: '100vh',
-    marginLeft: '20px'
   }
 }
 
@@ -61,13 +60,13 @@ export default class Sidebar extends Component {
             <div style={{ 
                 display: 'flex', 
                 gap: '20px',
-                padding: '10px',
+                padding: '15px 0px 15px 30px',
                 cursor: 'pointer',
                 borderRadius: '4px',
-                color: index === 1 ? 'blue' : '#030229',
-                backgroundImage: index === 1 ? "linear-gradient(to right, #EFEEFF 10%, #F8FAFF 50%)" :  'transparent',
+                color: index === 1 ? '#605BFF' : '#030229',
+                background: index === 1 ? 'linear-gradient(90deg, #ACA9FF 0%, rgba(172, 169, 255, 0.04) 90%)' :  'transparent',
                 fontFamily: 'Nunito',
-                fontSize: '16px'
+                fontSize: '16px',
               }}
               key={index}
             >

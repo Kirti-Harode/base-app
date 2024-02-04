@@ -8,6 +8,7 @@ import {useDropzone} from 'react-dropzone';
 import { LuUpload } from "react-icons/lu";
 import excel from '../assets/excel.png';
 import * as XLSX from 'xlsx';
+import { CgProfile } from "react-icons/cg";
 
 export default function UploadPage() {
 	const [files, setFiles] = useState([]);
@@ -28,16 +29,16 @@ export default function UploadPage() {
 	const { getRootProps, getInputProps, isDragActive} = useDropzone({ onDrop });
 
 	const handleFileSubmit=(e)=>{
-    e.preventDefault();
-    if(files!==null){
-      const workbook = XLSX.read(files,{type: 'buffer'});
-      const worksheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[worksheetName];
-      const data = XLSX.utils.sheet_to_json(worksheet);
-      setExcelData(data.slice(0,10));
+		e.preventDefault();
+		if(files!==null){
+			const workbook = XLSX.read(files,{type: 'buffer'});
+			const worksheetName = workbook.SheetNames[0];
+			const worksheet = workbook.Sheets[worksheetName];
+			const data = XLSX.utils.sheet_to_json(worksheet);
+			setExcelData(data.slice(0,10));
 			setIsUploaded(true);
-    }
-  }
+		}
+	}
 
 	return (
 		<div style={{
@@ -74,8 +75,8 @@ export default function UploadPage() {
 						justifyContent: 'space-between',
 						gap: '20px'
 					}}>
-						<img src={BellIcon} style={{width: '20px'}}alt=''/>
-						<img src={ProfilePhoto} style={{width: '30px'}}alt=''/>
+						<img src={BellIcon} style={{width: '22px'}}alt=''/>
+						<CgProfile  style={{fontSize: '25px'}}/>
 					</div>
 				</div>
 				<div style={{
