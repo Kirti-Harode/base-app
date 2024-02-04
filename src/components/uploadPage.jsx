@@ -55,9 +55,32 @@ export default function UploadPage() {
 
   const handleSelectChange = (index, value) => {
     const newSelectedOptions = [...selectedOptions];
-    newSelectedOptions[index] = value;
+		if( newSelectedOptions[index]){
+			newSelectedOptions[index].push(value);
+		}else{
+			newSelectedOptions[index] = [value];
+		}
     setSelectedOptions(newSelectedOptions);
   };
+	
+	const tableRows = (cell, cellIndex, rowIndex) => {
+		if(cellIndex === 1){
+			return (<a href={cell} style={{color: '#5B93FF', textDecoration: 'underline'}}>{cell}</a>); 
+		}else if(cellIndex === 3){
+			return (
+				<div>
+					<select value={selectedOptions[rowIndex]} onChange={(e) => handleSelectChange(rowIndex, e.target.value)}>
+						{cell.split(', ').map((option, cellIndex) => (
+							<option value={option} key={cellIndex}>{option}</option>
+						))}
+					</select>
+				</div>
+			)
+		}
+		else{
+			return cell;
+		}
+	}
 
 	return (
 		<div style={{
@@ -198,9 +221,13 @@ export default function UploadPage() {
 							width: '100%',
 							margin: '10px'
 						}}>
-							<table>
-								<thead>
-									<tr>
+							<table style={{padding: '10px'}}>
+								<thead style={{height: '40px', borderRadius: '8px'}}>
+									<tr style={{
+										fontFamily: 'Figtree',
+										fontSize: '14px',
+										fontWeight: '600'
+									}}>
 										{excelData[0].map((header, index) => (
 											<th key={index}>{header}</th>
 										))}
@@ -213,19 +240,22 @@ export default function UploadPage() {
 											style={{
 												backgroundColor: '#FFFFFF', 
 												borderRadius: '8px',
+												fontFamily: 'Figtree',
+												fontSize: '14px',
+												fontWeight: '400',
+												height: '60px',
 											}}
 										>
 											{row.map((cell, cellIndex) => (
-												<td key={cellIndex}>{cell}</td>
+												<td key={cellIndex}>
+													{tableRows(cell, cellIndex, rowIndex)}
+												</td>
 											))}
 											<td>
-												<select value={selectedOptions[rowIndex]} onChange={(e) => handleSelectChange(rowIndex, e.target.value)}>
-													<option value="">Select Option</option>
-													<option value="Option 1">Option 1</option>
-													<option value="Option 2">Option 2</option>
-												</select>
+												{selectedOptions[rowIndex] && 
+													selectedOptions[rowIndex].join(', ')
+												}
 											</td>
-											<td>{selectedOptions[rowIndex]}</td>
 										</tr>
 									))}
 								</tbody>
