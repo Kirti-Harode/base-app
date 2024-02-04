@@ -1,7 +1,6 @@
 import React from 'react';
 import Sidebar from './sidebar';
 import BellIcon from '../assets/bellIcon.png';
-import ProfilePhoto from '../assets/profilePhoto.png';
 import {useState} from 'react';
 import { useCallback } from 'react';
 import {useDropzone} from 'react-dropzone';
@@ -27,6 +26,8 @@ export default function UploadPage() {
 	}, [])
 
 	const { getRootProps, getInputProps, isDragActive} = useDropzone({ onDrop });
+console.log({files});
+console.log({excelData});
 
 	const handleFileSubmit=(e)=>{
 		e.preventDefault();
