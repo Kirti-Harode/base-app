@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 export const SignIn = () => {
 	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-
+	const [loggedIn, setLoggedIn] = useState(false);
 	const navigate = useNavigate();
     return(
 			<div style={{
@@ -34,10 +34,11 @@ export const SignIn = () => {
 				}}>
 					<GoogleLogin
 						onSuccess={credentialResponse => {
-							console.log(credentialResponse);
+							setLoggedIn(true);
+							navigate('/upload');
 						}}
 						onError={() => {
-							console.log('Login Failed');
+							setLoggedIn(false);
 						}}
 					/>
 				</div>

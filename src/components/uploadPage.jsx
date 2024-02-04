@@ -50,7 +50,6 @@ export default function UploadPage() {
 				paddingTop: '30px',
 				paddingLeft: '30px',
 				display: 'flex',
-				// justifyContent: 'center',
 				flexDirection: 'column',
 				gap: '20px'
 			}}>
