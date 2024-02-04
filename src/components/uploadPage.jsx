@@ -10,36 +10,54 @@ import * as XLSX from 'xlsx';
 import { CgProfile } from "react-icons/cg";
 
 export default function UploadPage() {
-	const [files, setFiles] = useState([]);
-	const [excelData, setExcelData] = useState([]);
+	const [selectedFile, setSelectedFile] = useState([]);
+  const [excelData, setExcelData] = useState(null);
+  const [error, setError] = useState(null);
 	const [isUploaded, setIsUploaded] = useState(false);
+	const [selectedOptions, setSelectedOptions] = useState([]);
 
-	const onDrop = useCallback(acceptedFiles => {	
-		if(acceptedFiles?.length){
-			setFiles(previousFiles => [
-				...previousFiles,
-				...acceptedFiles.map(file => 
-						Object.assign(file, {preview: URL.createObjectURL(file)})
-					)
-			])
-		}
-	}, [])
+	const onDrop = useCallback((acceptedFiles) => {
+    const file = acceptedFiles[0];
+		setSelectedFile(acceptedFiles[0]);
+    if (file) {
+      if (file.type === 'application/vnd.ms-excel' || file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+        setError(null);
+        const reader = new FileReader();
 
-	const { getRootProps, getInputProps, isDragActive} = useDropzone({ onDrop });
-console.log({files});
-console.log({excelData});
+        reader.onload = (e) => {
+          const data = new Uint8Array(e.target.result);
+          const workbook = XLSX.read(data, { type: 'array' });
+          const sheetName = workbook.SheetNames[0];
+          const sheet = workbook.Sheets[sheetName];
+          const jsonData = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+          setExcelData(jsonData);
+        };
+
+        reader.readAsArrayBuffer(file);
+      } else {
+        setError('Please upload a valid CSV or XLSX file.');
+      }
+    }
+  }, []);
+
+	const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: '.csv, .xlsx',
+    maxFiles: 1,
+  });
 
 	const handleFileSubmit=(e)=>{
 		e.preventDefault();
-		if(files!==null){
-			const workbook = XLSX.read(files,{type: 'buffer'});
-			const worksheetName = workbook.SheetNames[0];
-			const worksheet = workbook.Sheets[worksheetName];
-			const data = XLSX.utils.sheet_to_json(worksheet);
-			setExcelData(data.slice(0,10));
+		if(selectedFile!==null){
 			setIsUploaded(true);
 		}
 	}
+
+  const handleSelectChange = (index, value) => {
+    const newSelectedOptions = [...selectedOptions];
+    newSelectedOptions[index] = value;
+    setSelectedOptions(newSelectedOptions);
+  };
 
 	return (
 		<div style={{
@@ -49,20 +67,22 @@ console.log({excelData});
 			<div style={{
 				backgroundColor: '#F8FAFF',
 				width: '100%',
-				paddingTop: '30px',
-				paddingLeft: '30px',
 				display: 'flex',
 				flexDirection: 'column',
-				gap: '20px'
+				gap: '20px',
+				marginLeft: '210px',
+				height: '100vh'
 			}}>
 				<div style={{
 					display: 'flex',
 					justifyContent: 'space-between',
 					alignItems: 'center',
-					width: '800px',
+					width: '82%',
 					minWidth: '200px',
-					height: '32px',
-					position: 'fixed'
+					height: '40px',
+					position: 'fixed',
+					backgroundColor: '#F8FAFF',
+					padding: '55px 50px 30px 30px',
 				}}>
 					<div style={{
 						fontFamily: 'Figtree',
@@ -90,7 +110,7 @@ console.log({excelData});
 					borderRadius: '8px',
 					backgroundColor: 'white',
 					alignSelf: 'center',
-					marginTop: '90px'
+					marginTop: '140px',
 				}}>
 					<div {...getRootProps()} 
 						style={{
@@ -107,23 +127,34 @@ console.log({excelData});
 							gap: '20px'
 					}}>
 						<input {...getInputProps()} />
-						{
-							isDragActive ?
+							<img src={excel} style={{width: '30px'}}alt=''/>
+							{
+								isDragActive ?
 								<p>Drop the files here ...</p> :
 								<div>
-									<img src={excel} style={{width: '30px'}}alt=''/>
-									<div style={{color: '#999CA0'}}>Drop your excel sheet here, or 
-										<p style={{color: '#605BFF', cursor: 'pointer'}}>browse</p>
-									</div>
+									{ (selectedFile && excelData) ? 
+										<div style={{
+											display: 'flex',
+											flexDirection: 'column'
+										}}>
+											{selectedFile.name}
+											<button 
+												style={{ color: 'red', marginLeft: '5px', fontSize: '14px', marginTop: '2px' }} 
+												onClick={() => {setSelectedFile(null); setExcelData(null)}}
+											>
+												remove
+											</button>
+										</div>
+										: 
+										<div>
+											<div style={{color: '#999CA0'}}>Drop your excel sheet here, or 
+												<p style={{color: '#605BFF', cursor: 'pointer'}}>browse</p>
+											</div>
+										</div>
+									}
 								</div>
-						}
-						<div >
-							{
-								files.map((file, index )=> (
-									<p key={index}>{file.name}</p>
-								))
 							}
-						</div>
+						{error && <p style={{ color: 'red' }}>{error}</p>}
 					</div>
 					<button style={{
 						backgroundColor: '#605BFF',
@@ -141,16 +172,17 @@ console.log({excelData});
 						cursor: 'pointer'
 						}}
 						onClick={handleFileSubmit}
+						disabled={excelData === null}
 					>
 						<LuUpload style={{fontSize: '16px'}}/>
 						Upload
 					</button>
 				</div>
-					{	isUploaded ? 
+				{	isUploaded &&
 					<div style={{
 						display: 'flex',
 						flexDirection: 'column',
-						
+						marginLeft: '20px'
 					}}>
 						<h1 style={{ 
 							display: 'flex', 
@@ -167,28 +199,40 @@ console.log({excelData});
 							margin: '10px'
 						}}>
 							<table>
-								<tr>
-									<th>SI No.</th>
-									<th>Links</th>
-									<th>Prefix</th>
-									<th>Add Tags</th>
-									<th>Selected Tags</th>
-								</tr>
-								{
-									excelData.map((data, index) => (
-										<tr key={index}>
-											<td>{data.SI}</td>
-											<td>{data.Links}</td>
-											<td>{data.Prefix}</td>
-											<td>{data.AddTags}</td>
-											<td>{data.SelectedTags}</td>
+								<thead>
+									<tr>
+										{excelData[0].map((header, index) => (
+											<th key={index}>{header}</th>
+										))}
+									</tr>
+								</thead>
+								<tbody>
+									{excelData.slice(1).map((row, rowIndex) => (
+										<tr 
+											key={rowIndex} 
+											style={{
+												backgroundColor: '#FFFFFF', 
+												borderRadius: '8px',
+											}}
+										>
+											{row.map((cell, cellIndex) => (
+												<td key={cellIndex}>{cell}</td>
+											))}
+											<td>
+												<select value={selectedOptions[rowIndex]} onChange={(e) => handleSelectChange(rowIndex, e.target.value)}>
+													<option value="">Select Option</option>
+													<option value="Option 1">Option 1</option>
+													<option value="Option 2">Option 2</option>
+												</select>
+											</td>
+											<td>{selectedOptions[rowIndex]}</td>
 										</tr>
-									))
-								}
+									))}
+								</tbody>
 							</table>
 						</div>
 					</div> 
-					: <div></div>}
+				}
 			</div>
 		</div>
 	)

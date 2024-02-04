@@ -10,9 +10,15 @@ import Upload from '../assets/Upload.png';
 
 const styles = {
   sidebar: {
-    gap: '15px',
-    width: '218px',
-    height: '100vh',
+    backgroundColor: 'white',
+    height:' 100%', 
+    width: '218px', 
+    position: 'fixed', 
+    zIndex: 1,
+    top: 0, 
+    left: 0,
+    overflowX: 'hidden',
+    paddingTop: '10px',
   }
 }
 
