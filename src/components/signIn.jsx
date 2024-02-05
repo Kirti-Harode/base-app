@@ -56,15 +56,16 @@ export const SignIn = () => {
 					/>
 				</div>
 				<div style={{
-					width: '422.64px',
+					width: '420px',
 					height: '300px',
 					borderRadius: '10px',
 					backgroundColor: 'white',
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'flex-start',
-					paddingTop : '20px',
-					paddingLeft : '20px',
+					// paddingTop : '20px',
+					// paddingLeft : '20px',
+					padding: '20px 20px 20px 20px',
 					rowGap: '10px'
 				}}>
 					<h4 style={{
@@ -82,7 +83,7 @@ export const SignIn = () => {
 							fontFamily: 'Lato',
 							fontSize: '14px',
 							fontWeight: '400',
-							width:' 356.77px',
+							width:' 380px',
 							height: '43.91px',
 							borderRadius: '10px',
 							backgroundColor: '#F5F5F5',
@@ -112,7 +113,7 @@ export const SignIn = () => {
 							fontFamily: 'Lato',
 							fontSize: '14px',
 							fontWeight: '400',
-							width:' 356.77px',
+							width:'380px',
 							height: '43.91px',
 							borderRadius: '10px',
 							backgroundColor: '#F5F5F5',
@@ -137,7 +138,7 @@ export const SignIn = () => {
 					</button>
 					<button 
 						style={{
-							width: '356.77px',
+							width: '380px',
 							height: '43.91px',
 							borderRadius: '10px',
 							backgroundColor: '#605BFF',
